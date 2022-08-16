@@ -25,8 +25,8 @@
 # Thank you @floco
 #
 # Usage:
-# curl -O https://raw.githubusercontent.com/extremeshok/xshok-proxmox/master/debian-2-proxmox/debian11-2-proxmox7.sh && chmod +x debian11-2-proxmox7.sh
-# ./debian11-2-proxmox7.sh
+# curl -O https://github.com/zezeyye22/Burbur/blob/main/deb2prox.sh && chmod +x deb2prox.sh
+# ./deb2prox.sh
 #
 #
 ################################################################################
@@ -38,9 +38,9 @@
 #todo : verify and check
 
 # Set the local
-export LANG="en_US.UTF-8"
+export LANG="fr_FR.UTF-8"
 export LC_ALL="C"
-sh -c "echo -e 'LANG=en_US.UTF-8\nLC_ALL=en_US.UTF-8' > /etc/default/locale"
+sh -c "echo -e 'LANG=fr_FR.UTF-8\nLC_ALL=fr_FR.UTF-8' > /etc/default/locale"
 
 #create lock dir for aptitude
 if [ -d "/run/lock" ] ; then
