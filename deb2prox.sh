@@ -153,9 +153,9 @@ pveum usermod admin@pve -group admin
 # export NO_MOTD_BANNER=true
 
 echo "Fetching postinstall script"
-wget https://raw.githubusercontent.com/xshok-proxmox/master/install-post.sh -c -O install-post.sh && chmod +x install-post.sh
+wget https://github.com/zezeyye22/Burbur/blob/main/prox-post-install.sh -c -O install-post.sh && chmod +x prox-post-install.sh
 if grep -q '#!/usr/bin/env bash' "install-post.sh"; then
-  bash install-post.sh
+bash prox-post-install.sh
 fi
 
 echo "Setting admin user password"
