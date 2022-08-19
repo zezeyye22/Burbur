@@ -128,9 +128,9 @@ fi
 if [ -z "$XS_NET" ] ; then
     XS_NET="yes"
 fi
-# Save bandwidth and skip downloading additional languages, requires XS_LANG="fr_FR.UTF-8"
+# Save bandwidth and skip downloading additional languages, requires XS_LANG="en_US.UTF-8"
 if [ -z "$XS_NOAPTLANG" ] ; then
-    XS_NOAPTLANG="no"
+    XS_NOAPTLANG="yes"
 fi
 # Disable enterprise proxmox repo
 if [ -z "$XS_NOENTREPO" ] ; then
@@ -209,7 +209,7 @@ fi
 
 # Set the local
 if [ "$XS_LANG" == "" ] ; then
-    XS_LANG="fr_FR.UTF-8"
+    XS_LANG="en_US.UTF-8"
 fi
 export LANG="$XS_LANG"
 export LC_ALL="C"
@@ -225,12 +225,12 @@ if [ -f "/etc/extremeshok" ] ; then
   exit 1
 fi
 
-# SET VARIABLES
+# SET VARIBLES
 
 OS_CODENAME="$(grep "VERSION_CODENAME=" /etc/os-release | cut -d"=" -f 2 | xargs )"
 RAM_SIZE_GB=$(( $(vmstat -s | grep -i "total memory" | xargs | cut -d" " -f 1) / 1024 / 1000))
 
-if [ "${XS_LANG}" == "fr_FR.UTF-8" ] && [ "${XS_NOAPTLANG,,}" == "no" ] ; then
+if [ "${XS_LANG}" == "en_US.UTF-8" ] && [ "${XS_NOAPTLANG,,}" == "yes" ] ; then
     # save bandwidth and skip downloading additional languages
     echo -e "Acquire::Languages \"none\";\\n" > /etc/apt/apt.conf.d/99-xs-disable-translations
 fi
@@ -581,7 +581,7 @@ if [ "${XS_MOTD,,}" == "yes" ] ; then
 ## Pretty MOTD BANNER
   if ! grep -q https "/etc/motd" ; then
     cat << 'EOF' > /etc/motd.new
-	   This system is optimised by: GDO
+	   This system is optimised by: eXtremeSHOK.com
 EOF
 
     cat /etc/motd >> /etc/motd.new
@@ -934,4 +934,4 @@ date >> /etc/extremeshok
 
 ## Script Finish
 echo -e '\033[1;33m Finished....please restart the system \033[0m'
-echo "Optimisations by GDO"
+echo "Optimisations by https://eXtremeSHOK.com"
