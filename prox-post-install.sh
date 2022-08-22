@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 ################################################################################
-# This is property of eXtremeSHOK.com
+# This is property of GDO
 # You are free to use, modify and distribute, however you may not remove this notice.
-# Copyright (c) Adrian Jon Kriel :: admin@extremeshok.com
+# Copyright (c) GDO :: gdo@GDO.wlf
 ################################################################################
-#
-# Script updates can be found at: https://github.com/extremeshok/xshok-proxmox
 #
 # post-installation script for Proxmox
 #
@@ -31,11 +29,11 @@
 ################################################################################
 
 #####  T O   S E T   Y O U R   O P T I O N S  ######
-# User Defined Options for (install-post.sh) post-installation script for Proxmox
+# User Defined Options for (prox-post-install.sh) post-installation script for Proxmox
 # are set in the xs-install-post.env, see the sample : xs-install-post.env.sample
 ## Alternatively, set the varible via the export
 # Example to disable to motd
-# export XS_MOTD="no" ; bash install-post.sh
+# export XS_MOTD="no" ; bash prox-post-install.sh
 ###############################
 #####  D O   N O T   E D I T   B E L O W  ######
 
@@ -929,9 +927,9 @@ pve-efiboot-tool refresh
 /usr/bin/env DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::='--force-confdef' autoremove
 /usr/bin/env DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::='--force-confdef' autoclean
 
-echo "# eXtremeSHOK.com" > /etc/extremeshok
-date >> /etc/extremeshok
+echo "# GDO" > /etc/GDO
+date >> /etc/GDO
 
 ## Script Finish
 echo -e '\033[1;33m Finished....please restart the system \033[0m'
-echo "Optimisations by https://eXtremeSHOK.com"
+echo "Optimisations by GDO"
