@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 ################################################################################
-# This is property of eXtremeSHOK.com
+# This is property of GDO
 # You are free to use, modify and distribute, however you may not remove this notice.
-# Copyright (c) Adrian Jon Kriel :: admin@extremeshok.com
+# Copyright (c) CeePee :: gdo@GDO.wlf
 ################################################################################
-#
-# Script updates can be found at: https://github.com/extremeshok/xshok-proxmox
 #
 # Debian 11 to Proxmox 7 conversion script
 #
