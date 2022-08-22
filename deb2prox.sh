@@ -25,8 +25,8 @@
 # Thank you @floco
 #
 # Usage:
-# curl -O https://github.com/zezeyye22/Burbur/blob/main/deb2prox.sh && chmod +x deb2prox.sh
-# ./deb2prox.sh
+# curl -O https://raw.githubusercontent.com/extremeshok/xshok-proxmox/master/debian-2-proxmox/debian11-2-proxmox7.sh && chmod +x debian11-2-proxmox7.sh
+# ./debian11-2-proxmox7.sh
 #
 #
 ################################################################################
@@ -38,9 +38,9 @@
 #todo : verify and check
 
 # Set the local
-export LANG="fr_FR.UTF-8"
+export LANG="en_US.UTF-8"
 export LC_ALL="C"
-sh -c "echo -e 'LANG=fr_FR.UTF-8\nLC_ALL=fr_FR.UTF-8' > /etc/default/locale"
+sh -c "echo -e 'LANG=en_US.UTF-8\nLC_ALL=en_US.UTF-8' > /etc/default/locale"
 
 #create lock dir for aptitude
 if [ -d "/run/lock" ] ; then
@@ -153,9 +153,9 @@ pveum usermod admin@pve -group admin
 # export NO_MOTD_BANNER=true
 
 echo "Fetching postinstall script"
-wget https://github.com/zezeyye22/Burbur/blob/main/prox-post-install.sh -c -O install-post.sh && chmod +x prox-post-install.sh
+wget https://raw.githubusercontent.com/xshok-proxmox/master/install-post.sh -c -O install-post.sh && chmod +x install-post.sh
 if grep -q '#!/usr/bin/env bash' "install-post.sh"; then
-bash prox-post-install.sh
+  bash install-post.sh
 fi
 
 echo "Setting admin user password"
