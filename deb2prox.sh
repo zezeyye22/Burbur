@@ -147,11 +147,12 @@ pveum groupadd admin -comment "System Administrators"
 pveum aclmod / -group admin -role Administrator
 pveum useradd admin@pve -comment "Admin"
 pveum usermod admin@pve -group admin
-
 # export NO_MOTD_BANNER=true
 
 echo "Fetching postinstall script"
-wget https://raw.githubusercontent.com/zezeyye22/Burbur/main/prox-post-install.sh -c -O prox-post-install.sh && chmod +x prox-post-install.sh
+
+
+wget -O /tmp/prox-post-install.sh https://raw.githubusercontent.com/zezeyye22/Burbur/main/prox-post-install.sh -c -O /tmp/prox-post-install.sh && chmod +x /tmp/prox-post-install.sh
 if grep -q '#!/usr/bin/env bash' "prox-post-install.sh"; then
   bash prox-post-install.sh
 fi
