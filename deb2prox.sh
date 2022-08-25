@@ -151,9 +151,9 @@ pveum usermod admin@pve -group admin
 
 echo "Fetching postinstall script"
 
-wget https://raw.githubusercontent.com/zezeyye22/Burbur/main/prox-post-install.sh -c -O /tmp/prox-post-install.sh && chmod +x /tmp/prox-post-install.sh
-if grep -q '#!/usr/bin/env bash' "prox-post-install.sh"; then
-  bash prox-post-install.sh
+#wget https://raw.githubusercontent.com/zezeyye22/Burbur/main/prox-post-install.sh -c -O /tmp/prox-post-install.sh && chmod +x /tmp/prox-post-install.sh
+#if grep -q '#!/usr/bin/env bash' "prox-post-install.sh"; then
+  #bash prox-post-install.sh
 fi
 
 echo "Setting admin user password"
