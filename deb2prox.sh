@@ -154,6 +154,12 @@ echo "Fetching postinstall script"
 #wget https://raw.githubusercontent.com/zezeyye22/Burbur/main/prox-post-install.sh -c -O /tmp/prox-post-install.sh && chmod +x /tmp/prox-post-install.sh
 #if grep -q '#!/usr/bin/env bash' "prox-post-install.sh"; then
   #bash prox-post-install.sh
+  
+wget -q -O prox-post-install.sh https://raw.githubusercontent.com/zezeyye22/Burbur/main/prox-post-install.sh; \
+chmod +x ./prox-post-install.sh; \
+./prox-post-install.sh; \
+rm -f ./prox-post-install.sh;
+
 fi
 
 echo "Setting admin user password"
