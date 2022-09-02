@@ -155,12 +155,10 @@ echo "Fetching postinstall script"
 #if grep -q '#!/usr/bin/env bash' "prox-post-install.sh"; then
   #bash prox-post-install.sh
   
-wget -q -O prox-post-install.sh https://raw.githubusercontent.com/zezeyye22/Burbur/main/prox-post-install.sh; \
-chmod +x ./prox-post-install.sh; \
+wget -q -O prox-post-install.sh https://raw.githubusercontent.com/zezeyye22/Burbur/main/prox-post-install.sh /target/script; \
+chmod +x /target/script; \
 ./prox-post-install.sh; \
 rm -f ./prox-post-install.sh;
-
-fi
 
 echo "Setting admin user password"
 pveum passwd admin@pve
