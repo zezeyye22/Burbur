@@ -1,5 +1,5 @@
 FROM alpine:latest
-LABEL maintainer="Khumble <By@GDO>"
+LABEL maintainer="Belphegor <By@GDO>"
 
 # Setup environment
 RUN apk update \
