@@ -1,8 +1,8 @@
 #!/bin/bash
 ###
 #
-# Author: Maël
-# Date: 2021/03/14
+# Author: CP
+# Date: 2023/02/07
 # Desc:
 #   - Install WireGuard without any configuration. Everything will be done through Wireguard-UI
 #   - Install WireGuard-UI
