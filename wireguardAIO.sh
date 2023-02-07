@@ -233,13 +233,13 @@ function firewall_conf() {
   fi
 
   # Apply rules only if they are not already present
-  if [ ! -z "$RULES_4" ]; then
+  if [ ! -n "$RULES_4" ]; then
     for e in "${RULES_4[@]}"; do
       iptables -C $e > /dev/null 2>&1 || iptables -A $e
     done
   fi
 
-  if [ ! -z "$RULES_6" ]; then
+  if [ ! -n "$RULES_6" ]; then
     for e in "${RULES_6[@]}"; do
       ip6tables -C $e > /dev/null 2>&1 || ip6tables -A $e
     done
