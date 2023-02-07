@@ -32,7 +32,7 @@ WGUI_PATH="/opt/wgui"                                                           
 WGUI_BIN_PATH="/usr/local/bin"                                                                                          # Where the symbolic link will be make
 SYSTEMCTL_PATH="/usr/bin/systemctl"
 SYS_INTERFACE_GUESS=$(ip route show default | awk '/default/ {print $5}')
-PUBLIC_IP="$(curl -s icanhazip.com)"
+PUBLIC_IP="$(curl -s ifconfig.me)"
 
 function main() {
   cat <<EOM
@@ -104,8 +104,8 @@ EOM
 
 
   - To access your wireguard-ui please open a new ssh connexion
-      - ssh -L 6000:localhost:6000 user@myserverip
-      - And browse to http://localhost:6000
+      - ssh -L 5000:localhost:5000 user@myserverip
+      - And browse to http://localhost:5000
 
 ##################################################################################"
 
@@ -280,7 +280,7 @@ function wgui_conf() {
   [Service]
   Type=simple
   WorkingDirectory=$WGUI_PATH
-  ExecStart=$WGUI_BIN_PATH/wireguard-ui -bind-address 127.0.0.1:6000
+  ExecStart=$WGUI_BIN_PATH/wireguard-ui -bind-address 127.0.0.1:5000
 
   [Install]
   WantedBy=multi-user.target" > /etc/systemd/system/wgui_http.service
