@@ -6,7 +6,7 @@
 # Desc:
 #   - Install WireGuard without any configuration. Everything will be done through Wireguard-UI
 #   - Install WireGuard-UI
-#       - For a maximum security it will be use through ssh tunnel (ssh -L 5000:localhost:5000 user@serverip)
+#       - For a maximum security it will be use through ssh tunnel (ssh -L 5001:localhost:5001 user@serverip)
 #       - Please customise /opt/wgui/db/server/users.json after first login
 #   - Configure strict firewall
 #       - DROP any ipv4 & ipv6 requests
@@ -61,8 +61,8 @@ EOM
   done
   while ! [[ $WG_NETWORK =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/[0-9]{1,2}$ ]]; do
     echo "---"
-    read -p "Wireguard network ? [10.252.1.0/24]: " WG_NETWORK
-    WG_NETWORK=${WG_NETWORK:-"10.252.1.0/24"}
+    read -p "Wireguard network ? [10.66.65.0/24]: " WG_NETWORK
+    WG_NETWORK=${WG_NETWORK:-"10.66.65.0/24"}
   done
   while [[ -z $WG_INTERFACE ]]; do
     echo "---"
@@ -104,8 +104,8 @@ EOM
 
 
   - To access your wireguard-ui please open a new ssh connexion
-      - ssh -L 5000:localhost:5000 user@myserverip
-      - And browse to http://localhost:5000
+      - ssh -L 5001:localhost:5001 user@myserverip
+      - And browse to http://localhost:5001
 
 ##################################################################################"
 
@@ -280,7 +280,7 @@ function wgui_conf() {
   [Service]
   Type=simple
   WorkingDirectory=$WGUI_PATH
-  ExecStart=$WGUI_BIN_PATH/wireguard-ui -bind-address 127.0.0.1:5000
+  ExecStart=$WGUI_BIN_PATH/wireguard-ui -bind-address 127.0.0.1:5001
 
   [Install]
   WantedBy=multi-user.target" > /etc/systemd/system/wgui_http.service
