@@ -76,7 +76,7 @@ EOM
   done
   while ! [[ $STRICT_FIREWALL =~ ^(y|n)$ ]]; do
     echo "---"
-    read -p "Set the strict firewall ? [y/N]: " STRICT_FIREWALL
+    read -p "Set the strict firewall ? [y/n]: " STRICT_FIREWALL
     STRICT_FIREWALL=${STRICT_FIREWALL:-"n"}
   done
   if [ "$STRICT_FIREWALL" == "y" ]; then
@@ -104,7 +104,7 @@ EOM
 
 
   - To access your wireguard-ui please open a new ssh connexion
-      - ssh -L 5000:localhost:5000 user@myserver.domain.tld
+      - ssh -L 6000:localhost:6000 user@myserverip
       - And browse to http://localhost:6000
 
 ##################################################################################"
