@@ -6,7 +6,7 @@
 # Desc:
 #   - Install WireGuard without any configuration. Everything will be done through Wireguard-UI
 #   - Install WireGuard-UI
-#       - For a maximum security it will be use through ssh tunnel (ssh -L 6000:localhost:6000 user@serverip)
+#       - For a maximum security it will be use through ssh tunnel (ssh -L 5000:localhost:5000 user@serverip)
 #       - Please customise /opt/wgui/db/server/users.json after first login
 #   - Configure strict firewall
 #       - DROP any ipv4 & ipv6 requests
@@ -27,7 +27,7 @@
 ###
 OS_DETECTED="$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')"
 CONTINUE_ON_UNDETECTED_OS=false                                                                                         # Set true to continue if OS is not detected properly (not recommended)
-WGUI_LINK="https://github.com/ngoduykhanh/wireguard-ui/releases/download/v0.4.0/wireguard-ui-v0.4.0-linux-amd64.tar.gz" # Link to the last release
+WGUI_LINK="https://github.com/ngoduykhanh/wireguard-ui/releases/download/v0.4.0/wireguard-ui-v0.4.0-linux-arm64.tar.gz" # Link to the last release
 WGUI_PATH="/opt/wgui"                                                                                                   # Where Wireguard-ui will be install
 WGUI_BIN_PATH="/usr/local/bin"                                                                                          # Where the symbolic link will be make
 SYSTEMCTL_PATH="/usr/bin/systemctl"
