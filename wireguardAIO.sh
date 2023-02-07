@@ -148,7 +148,7 @@ function install() {
 function network_conf() {
   echo ""
   echo "### Enable ipv4 Forwarding"
-  sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+  sed -i 's/[#| ]*net.ipv4.ip_forward[ ]*=[ |0|1]*/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
   sysctl -p
 }
 
