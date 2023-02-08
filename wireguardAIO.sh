@@ -280,7 +280,7 @@ function wgui_conf() {
   [Service]
   Type=simple
   WorkingDirectory=$WGUI_PATH
-  ExecStart=$WGUI_BIN_PATH/wireguard-ui -bind-address 127.0.0.1:5000
+  ExecStart=$WGUI_BIN_PATH/wireguard-ui -bind-address 127.0.0.1:5001
 
   [Install]
   WantedBy=multi-user.target" > /etc/systemd/system/wgui_http.service
