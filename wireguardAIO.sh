@@ -27,12 +27,12 @@
 ###
 OS_DETECTED="$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')"
 CONTINUE_ON_UNDETECTED_OS=false                                                                                         # Set true to continue if OS is not detected properly (not recommended)
-WGUI_LINK="https://github.com/ngoduykhanh/wireguard-ui/releases/download/v0.4.0/wireguard-ui-v0.4.0-linux-amd64.tar.gz" # Link to the last release
+WGUI_LINK="https://github.com/ngoduykhanh/wireguard-ui/releases/download/v0.4.0/wireguard-ui-v0.4.0-linux-arm64.tar.gz" # Link to the last release
 WGUI_PATH="/opt/wgui"                                                                                                   # Where Wireguard-ui will be install
 WGUI_BIN_PATH="/usr/local/bin"                                                                                          # Where the symbolic link will be make
 SYSTEMCTL_PATH="/usr/bin/systemctl"
 SYS_INTERFACE_GUESS=$(ip route show default | awk '/default/ {print $5}')
-PUBLIC_IP="$(curl -s icanhazip.com)"
+PUBLIC_IP="$(curl -s ifconfig.me)"
 
 function main() {
   cat <<EOM
@@ -76,7 +76,7 @@ EOM
   done
   while ! [[ $STRICT_FIREWALL =~ ^(y|n)$ ]]; do
     echo "---"
-    read -p "Set the strict firewall ? [y/N]: " STRICT_FIREWALL
+    read -p "Set the strict firewall ? [y/n]: " STRICT_FIREWALL
     STRICT_FIREWALL=${STRICT_FIREWALL:-"n"}
   done
   if [ "$STRICT_FIREWALL" == "y" ]; then
