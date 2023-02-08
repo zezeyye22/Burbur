@@ -64,11 +64,12 @@ EOM
     read -p "Wireguard network ? [10.66.65.0/24]: " WG_NETWORK
     WG_NETWORK=${WG_NETWORK:-"10.66.65.0/24"}
   done
-  until [[ ${ALLOWED_IPS} =~ ^.+$ ]]; do
-		echo -e "\nWireGuard uses a parameter called AllowedIPs to determine what is routed over the VPN."
-		read -rp "Allowed IPs list for generated clients (leave default to route everything): " -e -i '0.0.0.0/0,::/0' ALLOWED_IPS
-		if [[ ${ALLOWED_IPS} == "" ]]; then
-			ALLOWED_IPS="0.0.0.0/0,::/0"
+  while [[ ${ALLOWED_IPS} =~ ^.+$ ]]; do
+    echo -e "\nWireGuard uses a parameter called AllowedIPs to determine what is routed over the VPN."
+    read -rp "Allowed IPs list for generated clients (leave default to route everything): " -e -i '0.0.0.0/0,::/0' ALLOWED_IPS
+  if [[ ${ALLOWED_IPS} == "" ]]; then
+    ALLOWED_IPS="0.0.0.0/0,::/0"
+  done
   while [[ -z $WG_INTERFACE ]]; do
     echo "---"
     read -p "Wireguard interface ? [wg0]: " WG_INTERFACE
