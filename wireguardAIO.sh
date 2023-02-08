@@ -6,7 +6,7 @@
 # Desc:
 #   - Install WireGuard without any configuration. Everything will be done through Wireguard-UI
 #   - Install WireGuard-UI
-#       - For a maximum security it will be use through ssh tunnel (ssh -L 5000:localhost:5000 user@vpn.domain.tld)
+#       - For a maximum security it will be use through ssh tunnel (ssh -L 5001:localhost:5001 user@vpn.domain.tld)
 #       - Please customise /opt/wgui/db/server/users.json after first login
 #   - Configure strict firewall
 #       - DROP any ipv4 & ipv6 requests
@@ -104,8 +104,8 @@ EOM
 
 
   - To access your wireguard-ui please open a new ssh connexion
-      - ssh -L 5000:localhost:5000 user@myserver.domain.tld
-      - And browse to http://localhost:5000
+      - ssh -L 5001:localhost:5001 user@myserver.domain.tld
+      - And browse to http://localhost:5001
 
 ##################################################################################"
 
