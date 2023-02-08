@@ -1,12 +1,12 @@
 #!/bin/bash
 ###
 #
-# Author: CP
-# Date: 2023/02/07
+# Author: Maël
+# Date: 2021/03/14
 # Desc:
 #   - Install WireGuard without any configuration. Everything will be done through Wireguard-UI
 #   - Install WireGuard-UI
-#       - For a maximum security it will be use through ssh tunnel (ssh -L 5001:localhost:5001 user@serverip)
+#       - For a maximum security it will be use through ssh tunnel (ssh -L 5000:localhost:5000 user@vpn.domain.tld)
 #       - Please customise /opt/wgui/db/server/users.json after first login
 #   - Configure strict firewall
 #       - DROP any ipv4 & ipv6 requests
@@ -27,12 +27,12 @@
 ###
 OS_DETECTED="$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')"
 CONTINUE_ON_UNDETECTED_OS=false                                                                                         # Set true to continue if OS is not detected properly (not recommended)
-WGUI_LINK="https://github.com/ngoduykhanh/wireguard-ui/releases/download/v0.4.0/wireguard-ui-v0.4.0-linux-arm64.tar.gz" # Link to the last release
+WGUI_LINK="https://github.com/ngoduykhanh/wireguard-ui/releases/download/v0.4.0/wireguard-ui-v0.4.0-linux-amd64.tar.gz" # Link to the last release
 WGUI_PATH="/opt/wgui"                                                                                                   # Where Wireguard-ui will be install
 WGUI_BIN_PATH="/usr/local/bin"                                                                                          # Where the symbolic link will be make
 SYSTEMCTL_PATH="/usr/bin/systemctl"
 SYS_INTERFACE_GUESS=$(ip route show default | awk '/default/ {print $5}')
-PUBLIC_IP="$(curl -s ifconfig.me)"
+PUBLIC_IP="$(curl -s icanhazip.com)"
 
 function main() {
   cat <<EOM
@@ -61,8 +61,8 @@ EOM
   done
   while ! [[ $WG_NETWORK =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/[0-9]{1,2}$ ]]; do
     echo "---"
-    read -p "Wireguard network ? [10.66.65.0/24]: " WG_NETWORK
-    WG_NETWORK=${WG_NETWORK:-"10.66.65.0/24"}
+    read -p "Wireguard network ? [10.252.1.0/24]: " WG_NETWORK
+    WG_NETWORK=${WG_NETWORK:-"10.252.1.0/24"}
   done
   while [[ -z $WG_INTERFACE ]]; do
     echo "---"
@@ -76,7 +76,7 @@ EOM
   done
   while ! [[ $STRICT_FIREWALL =~ ^(y|n)$ ]]; do
     echo "---"
-    read -p "Set the strict firewall ? [y/n]: " STRICT_FIREWALL
+    read -p "Set the strict firewall ? [y/N]: " STRICT_FIREWALL
     STRICT_FIREWALL=${STRICT_FIREWALL:-"n"}
   done
   if [ "$STRICT_FIREWALL" == "y" ]; then
@@ -104,8 +104,8 @@ EOM
 
 
   - To access your wireguard-ui please open a new ssh connexion
-      - ssh -L 5001:localhost:5001 user@myserverip
-      - And browse to http://localhost:5001
+      - ssh -L 5000:localhost:5000 user@myserver.domain.tld
+      - And browse to http://localhost:5000
 
 ##################################################################################"
 
@@ -148,8 +148,8 @@ function install() {
 function network_conf() {
   echo ""
   echo "### Enable ipv4 Forwarding"
-  sed -i 's/[#| ]*net.ipv4.ip_forward[ ]*=[ |0|1]*/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
-  /sbin/sysctl -p
+  sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+  sysctl -p
 }
 
 function firewall_conf() {
@@ -233,13 +233,13 @@ function firewall_conf() {
   fi
 
   # Apply rules only if they are not already present
-  if [ ! -n "$RULES_4" ]; then
+  if [ ! -z "$RULES_4" ]; then
     for e in "${RULES_4[@]}"; do
       iptables -C $e > /dev/null 2>&1 || iptables -A $e
     done
   fi
 
-  if [ ! -n "$RULES_6" ]; then
+  if [ ! -z "$RULES_6" ]; then
     for e in "${RULES_6[@]}"; do
       ip6tables -C $e > /dev/null 2>&1 || ip6tables -A $e
     done
@@ -280,7 +280,7 @@ function wgui_conf() {
   [Service]
   Type=simple
   WorkingDirectory=$WGUI_PATH
-  ExecStart=$WGUI_BIN_PATH/wireguard-ui -bind-address 127.0.0.1:5001
+  ExecStart=$WGUI_BIN_PATH/wireguard-ui -bind-address 127.0.0.1:5000
 
   [Install]
   WantedBy=multi-user.target" > /etc/systemd/system/wgui_http.service
