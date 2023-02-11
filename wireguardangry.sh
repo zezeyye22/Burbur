@@ -156,7 +156,7 @@ function installQuestions() {
 		echo -e "\nWireGuard uses a parameter called AllowedIPs to determine what is routed over the VPN."
 		read -rp "Allowed IPs list for generated clients (leave default to route everything): " -e -i '0.0.0.0/0,::/0' ALLOWED_IPS
 		if [[ ${ALLOWED_IPS} == "" ]]; then
-			ALLOWED_IPS="0.0.0.0/0,::/0"
+			ALLOWED_IPS="10.66.66.0/32,::/0"
 		fi
 	done
 
@@ -182,6 +182,13 @@ function installWireGuard() {
 		apt update
 		apt-get install -y iptables resolvconf qrencode
 		apt-get install -y -t buster-backports wireguard
+		
+	elif [[ "$os" == "debian" && "$os_version" -ge 11 ]]; then
+			# Debian 11 or higher
+		fi	
+		apt-get update
+		apt-get install -y qrencode ca-certificates $cron $firewall
+		apt-get install -y wireguard-tools --no-install-recommends
 	elif [[ ${OS} == 'fedora' ]]; then
 		if [[ ${VERSION_ID} -lt 32 ]]; then
 			dnf install -y dnf-plugins-core
