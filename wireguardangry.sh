@@ -184,8 +184,7 @@ function installWireGuard() {
 		apt-get install -y -t buster-backports wireguard
 		
 	elif [[ "$os" == "debian" && "$os_version" -ge 11 ]]; then
-			# Debian 11 or higher
-		fi	
+			# Debian 11 or higher	
 		apt-get update
 		apt-get install -y qrencode ca-certificates $cron $firewall
 		apt-get install -y wireguard-tools --no-install-recommends
