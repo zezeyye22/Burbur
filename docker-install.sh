@@ -11,7 +11,7 @@ apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software
 curl -fsSL https://download.docker.com/linux/$DIST_BASE/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$DIST_BASE $(lsb_release -cs) stable"
+add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/$DIST_BASE $(lsb_release -cs) stable"
 apt-get install -y docker-ce docker-ce-cli containerd.io
 
 groupadd docker
