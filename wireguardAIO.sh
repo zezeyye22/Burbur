@@ -61,8 +61,8 @@ EOM
   done
   while ! [[ $WG_NETWORK =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/[0-9]{1,2}$ ]]; do
     echo "---"
-    read -p "Wireguard network ? [10.66.65.0/24]: " WG_NETWORK
-    WG_NETWORK=${WG_NETWORK:-"10.66.65.0/24"}
+    read -p "Wireguard network ? [10.66.65.1/24]: " WG_NETWORK
+    WG_NETWORK=${WG_NETWORK:-"10.66.65.1/24"}
   done
   while [[ -z $WG_INTERFACE ]]; do
     echo "---"
