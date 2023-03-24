@@ -4,7 +4,8 @@ LABEL maintainer="Belphegor <By@GDO>"
 # Setup environment
 RUN apk update \
   && apk upgrade \
-  && apk add murmur=1.4.230-r4 \
+  && apk add murmur=1.4.287-r0 \
+  && apk add nano=7.0-r0 \
   && rm -rf /var/cache/apk/*
 
 # Add data dir
@@ -27,4 +28,5 @@ EXPOSE 64738/tcp 64738/udp
 
 # Start server
 ENTRYPOINT [ "/usr/bin/murmurd", "-ini", "/data/config.ini", "-v", "-fg" ]
+
 
