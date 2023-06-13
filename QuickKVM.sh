@@ -12,3 +12,4 @@ sudo mv ~/usr.sbin.dnsmasq /etc/apparmor.d/ && \
 sudo sed -i "s/\/usr\/libexec\/libvirt_leaseshelper m,/\/usr\/libexec\/libvirt_leaseshelper mr,/g" /etc/apparmor.d/usr.sbin.dnsmasq && \
 mkdir -p ~/.config/libvirt && \
 echo "uri_default = \"qemu:///system\"" >> ~/.config/libvirt/libvirt.conf && \
+echo "Enjoy Virtualization Now!"
