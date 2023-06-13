@@ -4,8 +4,8 @@ LABEL maintainer="Belphegor <By@GDO>"
 # Setup environment
 RUN apk update \
   && apk upgrade \
-  && apk add murmur=1.4.287-r0 \
-  && apk add nano=7.0-r0 \
+  && apk add murmur=1.4.287-r4 \
+  && apk add nano=7.2-r1 \
   && rm -rf /var/cache/apk/*
 
 # Add data dir
