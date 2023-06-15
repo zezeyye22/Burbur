@@ -24,14 +24,50 @@
 #       - https://github.com/ngoduykhanh/wireguard-ui
 #
 ###
-OS_DETECTED="$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')"
-CONTINUE_ON_UNDETECTED_OS=true                                                                                         # Set true to continue if OS is not detected properly (not recommended)
+#OS_DETECTED="$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')"
+#CONTINUE_ON_UNDETECTED_OS=true                                                                                         # Set true to continue if OS is not detected properly (not recommended)
 WGUI_LINK="https://github.com/ngoduykhanh/wireguard-ui/releases/download/v0.5.1/wireguard-ui-v0.5.1-linux-arm64.tar.gz" # Link to the last release
 WGUI_PATH="/opt/wgui"                                                                                                   # Where Wireguard-ui will be install
 WGUI_BIN_PATH="/usr/local/bin"                                                                                          # Where the symbolic link will be make
 SYSTEMCTL_PATH="/usr/bin/systemctl"
 SYS_INTERFACE_GUESS=$(ip route show default | awk '/default/ {print $5}')
 PUBLIC_IP="$(curl -s ifconfig.me)"
+
+function checkOS() {
+	source /etc/os-release
+	OS="${ID}"
+	if [[ ${OS} == "debian" || ${OS} == "raspbian" ]]; then
+		if [[ ${VERSION_ID} -lt 10 ]]; then
+			echo "Your version of Debian (${VERSION_ID}) is not supported. Please use Debian 10 Buster or later"
+			exit 1
+		fi
+		OS=debian # overwrite if raspbian
+	elif [[ ${OS} == "ubuntu" ]]; then
+		RELEASE_YEAR=$(echo "${VERSION_ID}" | cut -d'.' -f1)
+		if [[ ${RELEASE_YEAR} -lt 18 ]]; then
+			echo "Your version of Ubuntu (${VERSION_ID}) is not supported. Please use Ubuntu 18.04 or later"
+			exit 1
+		fi
+	elif [[ ${OS} == "fedora" ]]; then
+		if [[ ${VERSION_ID} -lt 32 ]]; then
+			echo "Your version of Fedora (${VERSION_ID}) is not supported. Please use Fedora 32 or later"
+			exit 1
+		fi
+	elif [[ ${OS} == 'centos' ]] || [[ ${OS} == 'almalinux' ]] || [[ ${OS} == 'rocky' ]]; then
+		if [[ ${VERSION_ID} == 7* ]]; then
+			echo "Your version of CentOS (${VERSION_ID}) is not supported. Please use CentOS 8 or later"
+			exit 1
+		fi
+	elif [[ -e /etc/oracle-release ]]; then
+		source /etc/os-release
+		OS=oracle
+	elif [[ -e /etc/arch-release ]]; then
+		OS=arch
+	else
+		echo "Looks like you aren't running this installer on a Debian, Ubuntu, Fedora, CentOS, AlmaLinux, Oracle or Arch Linux system"
+		exit 1
+	fi
+}
 
 function main() {
   cat <<EOM
