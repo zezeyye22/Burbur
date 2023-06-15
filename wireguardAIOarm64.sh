@@ -1,4 +1,4 @@
-#!/bin/bash#
+#!/bin/sh#
 # Author: C.P
 # Date: 2023/02/11
 # Desc:
