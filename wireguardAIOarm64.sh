@@ -18,7 +18,7 @@
 #       - Load them at boot via /etc/network/if-up.d/iptables
 ###########################################################################
 # Run in Root user
-# bash <(curl -s https://raw.githubusercontent.com/zezeyye22/Burbur/main/wireguardAIOarm64.sh) to launch the script
+# bash <(curl -s https://github.com/zezeyye22/Burbur/blob/main/wireguardAIOarm64.sh) to launch the script
 ###########################################################################
 # Ouvrez une connexion ssh avec le port forwarding : ssh -L 5000:localhost:5000 user@vpn_server_ip
 # Connectez vous à l'interface web Wireguard UI : 
