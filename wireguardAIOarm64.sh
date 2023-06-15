@@ -1,5 +1,4 @@
-#!/bin/bash
-###
+#!/usr/bin/env bash###
 #
 # Author: C.P
 # Date: 2023/02/11
