@@ -12,10 +12,20 @@
 #       - DROP any ipv4 & ipv6 requests
 #       - Allow loopback ipv4 & ipv6
 #       - Allow Outgoing SSH, HTTPs, HTTP, DNS, Ping
+###########################################################################
+# Run in Root user
+# bash <(curl -s https://raw.githubusercontent.com/zezeyye22/Burbur/main/wireguardAIOamd64.sh) to launch the script
+###########################################################################
+# Ouvrez une connexion ssh avec le port forwarding : ssh -L 5000:localhost:5000 user@vpn_server_ip
+# Connectez vous à l'interface web Wireguard UI : 
+# Browse http://localhost:5000 (utilisateur/mdp = admin)
+#  Le mot de passe par défaut peut être changé dans le fichier: /opt/wgui/db/server/users.json
+###########################################################################
 #       - Allow Ingoing SSH, Wireguard ($wg_port)
 #       - Allow everything needed by wireguard
 #   - Save iptables rules in /etc/iptables/
 #       - Load them at boot via /etc/network/if-up.d/iptables
+
 #
 # Sources:
 #   - Wireguard:
